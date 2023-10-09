@@ -3,9 +3,9 @@ package pitam.autoforegroundservice
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context.NOTIFICATION_SERVICE
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.LifecycleService
 
 
 object NotificationUtils {
@@ -19,8 +19,7 @@ object NotificationUtils {
         notificationText: String,
         customize: NotificationCompat.Builder.() -> NotificationCompat.Builder = { this }
     ): Notification {
-        val notificationManager =
-            getSystemService(LifecycleService.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(
