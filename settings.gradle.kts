@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AutoForegroundService"
 include(":app")
- 
+include(":autoforegroundservice")
