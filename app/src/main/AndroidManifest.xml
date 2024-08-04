@@ -27,6 +27,7 @@
         </activity>
         <service
             android:name=".service.DemoService"
+            android:foregroundServiceType="dataSync"
             android:exported="false" />
     </application>
 
