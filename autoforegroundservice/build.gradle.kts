@@ -4,13 +4,16 @@ plugins {
     id("maven-publish")
 }
 
-//publishing {
-//    publications {
-//        create<MavenPublication>("maven") {
-//            from(components.findByName("release"))
-//        }
-//    }
-//}
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components.findByName("release"))
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar") {
+                extension = "aar"
+            }
+        }
+    }
+}
 
 android {
     namespace = "pitam.autoforegroundservice"
