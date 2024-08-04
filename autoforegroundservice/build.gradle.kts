@@ -11,9 +11,6 @@ publishing {
             groupId = "pitam"
             artifactId = "autoforegroundservice"
             version = "1.0.0"
-            afterEvaluate {
-                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
-            }
         }
     }
 }
