@@ -43,7 +43,6 @@ abstract class AutoForegroundService : LifecycleService() {
 
     // The notification to be displayed when in the foreground
     private var currentNotification: ForegroundNotification? = null
-        get() = if (isForeground) field else null
 
     fun updateNotification(notification: ForegroundNotification) {
         Timber.d("Updating notification")
@@ -70,6 +69,7 @@ abstract class AutoForegroundService : LifecycleService() {
 
                 currentNotification != null -> {
                     // No clients bound but notification is available, start foreground
+                    Timber.d("Starting foreground")
                     startForeground(currentNotification.id, currentNotification.notification)
                     isForeground = true
                 }
