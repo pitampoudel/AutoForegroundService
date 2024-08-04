@@ -14,6 +14,9 @@ publishing {
         }
     }
 }
+tasks.named("publishMavenPublicationToMavenLocal") {
+    mustRunAfter(tasks.named("bundleReleaseAar"))
+}
 
 android {
     namespace = "pitam.autoforegroundservice"
