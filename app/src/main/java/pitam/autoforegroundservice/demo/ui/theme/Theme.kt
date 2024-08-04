@@ -1,4 +1,4 @@
-package pitam.autoforegroundservice.ui.theme
+package pitam.autoforegroundservice.demo.ui.theme
 
 import android.app.Activity
 import android.os.Build

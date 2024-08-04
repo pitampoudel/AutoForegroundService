@@ -1,4 +1,4 @@
-package pitam.autoforegroundservice
+package pitam.autoforegroundservice.demo
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

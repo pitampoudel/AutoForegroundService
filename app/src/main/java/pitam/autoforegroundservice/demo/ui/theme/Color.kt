@@ -1,4 +1,4 @@
-package pitam.autoforegroundservice.ui.theme
+package pitam.autoforegroundservice.demo.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

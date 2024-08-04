@@ -1,4 +1,4 @@
-package pitam.autoforegroundservice
+package pitam.demo
 
 import android.app.Notification
 import android.content.Intent

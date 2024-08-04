@@ -1,4 +1,4 @@
-package pitam.autoforegroundservice.service
+package pitam.autoforegroundservice.demo.service
 
 import android.content.ComponentName
 import android.content.ServiceConnection

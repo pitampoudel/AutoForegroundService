@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "pitam.autoforegroundservice"
+    namespace = "pitam.autoforegroundservice.demo"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "pitam.autoforegroundservice"
+        applicationId = "pitam.autoforegroundservice.demo"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

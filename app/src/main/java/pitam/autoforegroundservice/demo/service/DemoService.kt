@@ -1,4 +1,4 @@
-package pitam.autoforegroundservice.service
+package pitam.autoforegroundservice.demo.service
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -7,11 +7,11 @@ import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import dagger.hilt.android.AndroidEntryPoint
-import pitam.autoforegroundservice.AutoForegroundService
-import pitam.autoforegroundservice.ForegroundNotification
-import pitam.autoforegroundservice.MainActivity
-import pitam.autoforegroundservice.NotificationUtils.buildNotification
-import pitam.autoforegroundservice.R
+import pitam.autoforegroundservice.demo.MainActivity
+import pitam.autoforegroundservice.demo.R
+import pitam.demo.AutoForegroundService
+import pitam.demo.ForegroundNotification
+import pitam.demo.NotificationUtils.buildNotification
 
 @AndroidEntryPoint
 class DemoService : AutoForegroundService() {

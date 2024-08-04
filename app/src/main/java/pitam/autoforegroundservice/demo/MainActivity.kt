@@ -1,4 +1,4 @@
-package pitam.autoforegroundservice
+package pitam.autoforegroundservice.demo
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,9 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import pitam.autoforegroundservice.service.DemoService
-import pitam.autoforegroundservice.service.DemoServiceConnection
-import pitam.autoforegroundservice.ui.theme.AutoForegroundServiceTheme
+import pitam.autoforegroundservice.demo.service.DemoService
+import pitam.autoforegroundservice.demo.service.DemoServiceConnection
+import pitam.autoforegroundservice.demo.ui.theme.AutoForegroundServiceTheme
 import javax.inject.Inject
 
 @AndroidEntryPoint

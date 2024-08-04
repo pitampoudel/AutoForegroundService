@@ -1,4 +1,4 @@
-package pitam.autoforegroundservice
+package pitam.autoforegroundservice.demo
 
 import org.junit.Test
 
