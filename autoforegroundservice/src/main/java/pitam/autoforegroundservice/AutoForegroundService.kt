@@ -4,11 +4,22 @@ import android.app.Notification
 import android.content.Intent
 import android.os.IBinder
 import androidx.lifecycle.LifecycleService
+import timber.log.Timber
 
-abstract class AutoForegroundService(private val notificationId: Int) : LifecycleService() {
+data class ForegroundNotification(val id: Int, val notification: Notification)
+
+abstract class AutoForegroundService : LifecycleService() {
+    @Volatile
     private var bindCount = 0
+        set(value) {
+            field = value
+            manageServiceLifecycle()
+        }
+
     private fun handleBind() {
-        bindCount++
+        synchronized(this) {
+            bindCount++
+        }
         startService(Intent(this, this::class.java))
     }
 
@@ -17,51 +28,66 @@ abstract class AutoForegroundService(private val notificationId: Int) : Lifecycl
         return super.onBind(intent)
     }
 
+    override fun onUnbind(intent: Intent?): Boolean {
+        synchronized(this) {
+            bindCount--
+        }
+        return true // Allows clients to rebind, triggering onRebind
+    }
+
     override fun onRebind(intent: Intent?) {
         handleBind()
     }
 
+    private var isForeground = false
+
+    // The notification to be displayed when in the foreground
+    private var currentNotification: ForegroundNotification? = null
+        get() = if (isForeground) field else null
+
+    fun updateNotification(notification: ForegroundNotification) {
+        Timber.d("Updating notification")
+        currentNotification = notification
+        if (isForeground) {
+            startForeground(notification.id, notification.notification)
+        } else {
+            manageServiceLifecycle()
+        }
+    }
+
+    private fun manageServiceLifecycle() {
+        Timber.d("Managing lifecycle, bindCount: $bindCount")
+        synchronized(this) {
+            val currentNotification = currentNotification
+            when {
+                bindCount > 0 -> {
+                    // Clients are bound, stop foreground if active
+                    if (isForeground) {
+                        stopForeground(STOP_FOREGROUND_REMOVE)
+                        isForeground = false
+                    }
+                }
+
+                currentNotification != null -> {
+                    // No clients bound but notification is available, start foreground
+                    startForeground(currentNotification.id, currentNotification.notification)
+                    isForeground = true
+                }
+
+                else -> {
+                    // No clients and no notification, stop the service
+                    stopSelf()
+                }
+            }
+        }
+    }
+
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-        manageLifetime()
-        // In case we are stopped by the system, have the system restart this service so we can
-        // manage our lifetime appropriately.
+        manageServiceLifecycle()
         return START_STICKY
     }
 
-
-    override fun onUnbind(intent: Intent?): Boolean {
-        bindCount--
-        manageLifetime()
-        // Allow clients to rebind, in which case onRebind will be called.
-        return true
-    }
-
-    private var notification: Notification? = null
-    fun updateNotification(notification: Notification) {
-        this.notification = notification
-        if (isForeground) {
-            startForeground(notificationId, this.notification)
-        }
-    }
-
-    private var isForeground = false
-    private fun manageLifetime() {
-        when {
-            bindCount > 0 -> {
-                isForeground = false
-                stopForeground(STOP_FOREGROUND_REMOVE)
-            }
-
-            notification != null -> {
-                isForeground = true
-                startForeground(notificationId, notification)
-            }
-
-            else -> {
-                stopSelf()
-            }
-        }
-    }
 
 }
