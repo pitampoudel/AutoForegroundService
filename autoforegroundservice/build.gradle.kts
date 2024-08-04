@@ -55,9 +55,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
-    //Timber
-    api("com.jakewharton.timber:timber:5.0.1")
-
     //LifecycleService
-    api("androidx.lifecycle:lifecycle-service:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-service:2.8.4")
 }

@@ -3,8 +3,8 @@ package pitam.autoforegroundservice
 import android.app.Notification
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import androidx.lifecycle.LifecycleService
-import timber.log.Timber
 
 data class ForegroundNotification(val id: Int, val notification: Notification)
 
@@ -45,7 +45,7 @@ abstract class AutoForegroundService : LifecycleService() {
     private var currentNotification: ForegroundNotification? = null
 
     fun updateNotification(notification: ForegroundNotification) {
-        Timber.d("Updating notification")
+        Log.d(this::class.simpleName,"Updating notification")
         currentNotification = notification
         if (isForeground) {
             startForeground(notification.id, notification.notification)
@@ -55,7 +55,7 @@ abstract class AutoForegroundService : LifecycleService() {
     }
 
     private fun manageServiceLifecycle() {
-        Timber.d("Managing lifecycle, bindCount: $bindCount")
+        Log.d(this::class.simpleName,"Managing lifecycle, bindCount: $bindCount")
         synchronized(this) {
             val currentNotification = currentNotification
             when {
@@ -69,7 +69,7 @@ abstract class AutoForegroundService : LifecycleService() {
 
                 currentNotification != null -> {
                     // No clients bound but notification is available, start foreground
-                    Timber.d("Starting foreground")
+                    Log.d(this::class.simpleName,"Starting foreground")
                     startForeground(currentNotification.id, currentNotification.notification)
                     isForeground = true
                 }
