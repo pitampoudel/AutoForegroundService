@@ -9,9 +9,9 @@ import androidx.core.app.NotificationCompat
 import dagger.hilt.android.AndroidEntryPoint
 import pitam.autoforegroundservice.demo.MainActivity
 import pitam.autoforegroundservice.demo.R
-import pitam.demo.AutoForegroundService
-import pitam.demo.ForegroundNotification
-import pitam.demo.NotificationUtils.buildNotification
+import pitam.autoforegroundservice.AutoForegroundService
+import pitam.autoforegroundservice.ForegroundNotification
+import pitam.autoforegroundservice.NotificationUtils.buildNotification
 
 @AndroidEntryPoint
 class DemoService : AutoForegroundService() {
