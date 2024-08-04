@@ -4,13 +4,13 @@ plugins {
     id("maven-publish")
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components.findByName("release"))
-        }
-    }
-}
+//publishing {
+//    publications {
+//        create<MavenPublication>("maven") {
+//            from(components.findByName("release"))
+//        }
+//    }
+//}
 
 android {
     namespace = "pitam.autoforegroundservice"
